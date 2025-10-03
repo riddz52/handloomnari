@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paithani Sarees - HandloomNari</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff8f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #b22222;
+    }
+    .product-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .product-description {
+      font-size: 0.95rem;
+      margin: 0.8rem 0;
+      color: #666;
+    }
+    .price {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #e63946;
+      margin: 0.5rem 0;
+    }
+    .quantity {
+      width: 60px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+    .add-to-cart {
+      background-color: #f75d59;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .add-to-cart:hover {
+      background-color: #d94440;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Paithani Sarees Collection</h1>
+  
+  <div class="product-container">
+
+    <!-- Repeat this card 10 times with different content -->
+    <div class="product-card">
+      <img src="../images/p1.jpg" alt="Paithani Saree 1" />
+      <p class="product-description">Authentic silk Paithani saree with handwoven zari border.</p>
+      <div class="price">₹7,500</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/p2.jpg" alt="Paithani Saree 2" />
+      <p class="product-description">Handloom beauty with peacock pallu design and rich golden weaves.</p>
+      <div class="price">₹8,200</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/p3.jpg" alt="Paithani Saree 3" />
+      <p class="product-description">Vibrant traditional motifs with 100% pure silk craftsmanship.</p>
+      <div class="price">₹6,950</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/p4.jpg" alt="Paithani Saree 4" />
+      <p class="product-description">Royal Maroon with lotus weaving and golden border finesse.</p>
+      <div class="price">₹7,800</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/p5.jpg" alt="Paithani Saree 5" />
+      <p class="product-description">Pure handloom silk with dual-tone finish and traditional pallu.</p>
+      <div class="price">₹9,300</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/6p.jpg" alt="Paithani Saree 6" />
+      <p class="product-description">Classic gold and green combination with intricate zari motifs.</p>
+      <div class="price">₹8,750</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/7p.jpg" alt="Paithani Saree 7" />
+      <p class="product-description">Authentic Yeola weave with contemporary elegance and tradition.</p>
+      <div class="price">₹7,100</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/8p.jpg" alt="Paithani Saree 8" />
+      <p class="product-description">Magenta silk with unique border detailing and floral handwork.</p>
+      <div class="price">₹8,000</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/9p.jpg" alt="Paithani Saree 9" />
+      <p class="product-description">Traditional charm with parrot motifs and shimmer silk base.</p>
+      <div class="price">₹9,500</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="../images/10p.jpg" alt="Paithani Saree 10" />
+      <p class="product-description">Limited edition Paithani with handcrafted elegance and vibrant tones.</p>
+      <div class="price">₹10,200</div>
+      <input type="number" class="quantity" min="1" value="1" />
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+  </div>
+<script>
+  // Utility: parse price string "₹7,500" to number 7500
+  function parsePrice(priceStr) {
+    return Number(priceStr.replace(/[^0-9.-]+/g,""));
+  }
+
+  // Attach click event to all add-to-cart buttons
+  document.querySelectorAll('.add-to-cart').forEach((btn, index) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const card = btn.closest('.product-card');
+      const description = card.querySelector('.product-description').innerText.trim();
+      const priceText = card.querySelector('.price').innerText.trim();
+      const price = parsePrice(priceText);
+      const quantityInput = card.querySelector('.quantity');
+      let quantity = parseInt(quantityInput.value);
+      const img = card.querySelector('img').src;
+
+      if (isNaN(quantity) || quantity < 1) {
+        alert('Please enter a valid quantity');
+        return;
+      }
+
+      // Product object
+      const product = {
+        id: `product-${index + 1}`,
+        name: description,   // ✅ matches cart.html
+        price: price,
+        quantity: quantity,
+        img: img
+      };
+
+      // Get existing cart or empty
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Check if product already in cart
+      const existingIndex = cart.findIndex(item => item.id === product.id);
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += product.quantity;
+      } else {
+        cart.push(product);
+      }
+
+      // Save updated cart
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Redirect to cart page
+      window.location.href = '../cart.html'; // adjust path if needed
+    });
+  });
+</script>
+
+</body>
+</html>
