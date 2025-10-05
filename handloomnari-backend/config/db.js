@@ -1,18 +1,20 @@
-   const mysql = require('mysql2');
+const mysql = require('mysql2');
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',          // Your MySQL username
-    password: 'tictactoe', // <-- Put your MySQL root password here
-    database: 'handloomnari'  // Your database name
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST || 'shortline.proxy.rlwy.net',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'okiMSvbLqUQfqJvTGNCgueNoihPEIBGs',
+  database: process.env.DB_NAME || 'railway',
+  port: process.env.DB_PORT || 23311,
 });
 
-db.connect((err) => {
-    if (err) {
-        console.error('❌ Database connection failed:', err);
-    } else {
-        console.log('✅ Connected to MySQL database');
-    }
+connection.connect((err) => {
+  if (err) {
+    console.error('❌ Database connection failed:', err);
+  } else {
+    console.log('✅ Connected to Railway MySQL database');
+  }
 });
 
-module.exports = db;
+module.exports = connection;
+
