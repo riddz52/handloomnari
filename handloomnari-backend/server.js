@@ -1,19 +1,29 @@
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const db = require('./config/db');
+const db = require('./config/db'); // Your updated Railway db.js
 
 const app = express();
-const PORT = 5050;
+const PORT = process.env.PORT || 5050; // Node server port (not MySQL)
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Test route
+// Root route
 app.get('/', (req, res) => {
     res.send('🚀 Handloom Nari Backend is running!');
+});
+
+// ✅ Test database connection route
+app.get('/test-db', (req, res) => {
+    db.query('SELECT NOW() AS time', (err, result) => {
+        if (err) {
+            console.error('❌ Database test failed:', err);
+            return res.status(500).json({ message: 'Database connection failed', error: err });
+        }
+        res.json({ message: '✅ Database connection successful!', currentTime: result[0].time });
+    });
 });
 
 // Place order API
@@ -24,10 +34,8 @@ app.post('/place-order', (req, res) => {
         return res.status(400).json({ message: '❌ Invalid order data' });
     }
 
-    // Calculate total order amount
-    let totalAmount = cart.reduce((sum, item) => sum + (item.rate * item.quantity), 0);
+    const totalAmount = cart.reduce((sum, item) => sum + item.rate * item.quantity, 0);
 
-    // Insert into orders table
     const orderQuery = `
         INSERT INTO orders (customer_name, customer_address, phone, total_amount)
         VALUES (?, ?, ?, ?)
@@ -36,16 +44,10 @@ app.post('/place-order', (req, res) => {
     db.query(orderQuery, [customer_name, customer_address, phone, totalAmount], (err, result) => {
         if (err) {
             console.error('❌ Error inserting order:', err);
-            return res.status(500).json({ message: 'Database error' });
+            return res.status(500).json({ message: 'Database error', error: err });
         }
 
         const orderId = result.insertId;
-
-        // Prepare cart details
-        const cartQuery = `
-            INSERT INTO cart_details (order_id, product_name, quantity, rate, total_amount)
-            VALUES ?
-        `;
 
         const cartValues = cart.map(item => [
             orderId,
@@ -55,10 +57,15 @@ app.post('/place-order', (req, res) => {
             item.quantity * item.rate
         ]);
 
+        const cartQuery = `
+            INSERT INTO cart_details (order_id, product_name, quantity, rate, total_amount)
+            VALUES ?
+        `;
+
         db.query(cartQuery, [cartValues], (err2) => {
             if (err2) {
                 console.error('❌ Error inserting cart items:', err2);
-                return res.status(500).json({ message: 'Database error' });
+                return res.status(500).json({ message: 'Database error', error: err2 });
             }
 
             res.status(201).json({ message: '✅ Order placed successfully', orderId });
@@ -69,10 +76,14 @@ app.post('/place-order', (req, res) => {
 // Get all orders
 app.get('/orders', (req, res) => {
     db.query('SELECT * FROM orders', (err, results) => {
-        if (err) return res.status(500).json({ message: 'Database error' });
+        if (err) {
+            console.error('❌ Error fetching orders:', err);
+            return res.status(500).json({ message: 'Database error', error: err });
+        }
         res.json(results);
     });
 });
+
 // Test route to insert a sample order
 app.get('/test-order', (req, res) => {
     const sampleOrder = {
@@ -87,8 +98,10 @@ app.get('/test-order', (req, res) => {
 
     const totalAmount = sampleOrder.cart.reduce((sum, item) => sum + item.rate * item.quantity, 0);
 
-    const orderQuery = `INSERT INTO orders (customer_name, customer_address, phone, total_amount)
-                        VALUES (?, ?, ?, ?)`;
+    const orderQuery = `
+        INSERT INTO orders (customer_name, customer_address, phone, total_amount)
+        VALUES (?, ?, ?, ?)
+    `;
 
     db.query(orderQuery, [sampleOrder.customer_name, sampleOrder.customer_address, sampleOrder.phone, totalAmount], (err, result) => {
         if (err) return res.status(500).send('Error inserting order: ' + err);
@@ -103,7 +116,10 @@ app.get('/test-order', (req, res) => {
             item.quantity * item.rate
         ]);
 
-        const cartQuery = `INSERT INTO cart_details (order_id, product_name, quantity, rate, total_amount) VALUES ?`;
+        const cartQuery = `
+            INSERT INTO cart_details (order_id, product_name, quantity, rate, total_amount)
+            VALUES ?
+        `;
 
         db.query(cartQuery, [cartValues], (err2) => {
             if (err2) return res.status(500).send('Error inserting cart items: ' + err2);
